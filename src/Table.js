@@ -10,6 +10,7 @@ const TBody = (props) => {
   };
   const tableRow = props.taskData.map((task, index) => {
     const isChecked = task.checked ? "checked" : "";
+
     return (
       <tr key={index}>
         <td className={isChecked}>{task.task}</td>

@@ -10,13 +10,13 @@ class App extends Component {
         id: 0,
         username: "David",
         pwd: "1234",
-        tasks: ["Faire les courses", "Nettoyer la voiture"],
+        tasks: [],
       },
       {
         id: 1,
         username: "Julien",
         pwd: "0000",
-        tasks: ["Ranger le garage", "Appeler mamie"],
+        tasks: [],
       },
     ],
     connectedUser: {},
@@ -24,7 +24,7 @@ class App extends Component {
 
   //new task
   handleSubmitTask = (task) => {
-    this.setState({ tasks: [...this.state.tasks, task] });
+    this.setState({ tasks: [...this.state.connectedUser.tasks, task] });
   };
 
   //fill connectedUser with user
@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <div>
         <h1>To Do List</h1>
-        {this.state.connectedUser.id ? (
+        {this.state.connectedUser.hasOwnProperty("id") ? (
           <div>
             <Form handleSubmitTask={this.handleSubmitTask} />
             <Table

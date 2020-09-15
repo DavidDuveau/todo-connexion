@@ -28,7 +28,7 @@ class Connect extends Component {
     console.log(this.state.userName);
     return (
       <form onSubmit={this.submitConnection}>
-        <label for="userName">Nom</label>
+        <label htmlFor="userName">Nom</label>
         <input
           type="text"
           name="userName"
@@ -37,7 +37,7 @@ class Connect extends Component {
           onChange={this.handleChange}
         />
 
-        <label for="passWord">Mot de passe</label>
+        <label htmlFor="passWord">Mot de passe</label>
         <input
           type="password"
           name="passWord"
