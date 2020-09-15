@@ -31,10 +31,9 @@ class App extends Component {
   handleSubmitConnect = (userName, passWord) => {
     this.setState({
       connectedUser: this.state.users.find(
-        (element) => element.username === userName && element.pwd === passWord
+        (person) => person.username === userName && person.pwd === passWord
       ),
     });
-    console.log(this.state.connectedUser);
   };
 
   //delete task selected
@@ -61,6 +60,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.connectedUser);
     return (
       <div>
         <h1>To Do List</h1>
@@ -74,10 +74,7 @@ class App extends Component {
             />
           </div>
         ) : (
-          <Connect
-            userData={this.state.connectedUser}
-            handleSubmitConnect={this.handleSubmitConnect}
-          />
+          <Connect handleSubmitConnect={this.handleSubmitConnect} />
         )}
       </div>
     );

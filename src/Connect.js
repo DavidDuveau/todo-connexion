@@ -18,12 +18,14 @@ class Connect extends Component {
 
   submitConnection = (event) => {
     event.preventDefault();
-    this.props.handleSubmitConnect(this.state);
+    this.props.handleSubmitConnect(this.state.userName, this.state.passWord);
     this.setState(this.initialState);
   };
 
   render() {
     const { userName, passWord } = this.state;
+    console.log(this.state.passWord);
+    console.log(this.state.userName);
     return (
       <form onSubmit={this.submitConnection}>
         <label for="userName">Nom</label>
