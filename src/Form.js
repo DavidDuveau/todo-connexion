@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Form.css";
 
 class Form extends Component {
   initialState = {
@@ -24,7 +25,7 @@ class Form extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    this.props.handleSubmit(this.state);
+    this.props.handleSubmitTask(this.state);
     this.setState(this.initialState);
   };
 

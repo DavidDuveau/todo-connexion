@@ -1,3 +1,9 @@
 .checked {
+  color: lightgrey;
   text-decoration: line-through;
+}
+
+#table {
+  width: 50%;
+  margin: 0 auto;
 }

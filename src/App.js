@@ -1,17 +1,41 @@
 import React, { Component } from "react";
 import Table from "./Table";
 import Form from "./Form";
+import Connect from "./Connect";
 
 class App extends Component {
   state = {
-    tasks: [],
+    users: [
+      {
+        id: 0,
+        username: "David",
+        pwd: "1234",
+        tasks: ["Faire les courses", "Nettoyer la voiture"],
+      },
+      {
+        id: 1,
+        username: "Julien",
+        pwd: "0000",
+        tasks: ["Ranger le garage", "Appeler mamie"],
+      },
+    ],
+    connectedUser: {},
   };
 
-  handleSubmit = (task) => {
+  handleSubmitTask = (task) => {
     this.setState({ tasks: [...this.state.tasks, task] });
   };
 
-  deleteTickedTasks = (index) => {
+  handleSubmitConnect = (userName, passWord) => {
+    this.setState({
+      connectedUser: this.state.users.find(
+        (element) => element.username === userName && element.pwd === passWord
+      ),
+    });
+    console.log(this.state);
+  };
+
+  deleteTickedTasks = () => {
     const { tasks } = this.state;
     console.log(tasks);
     this.setState({
@@ -33,16 +57,25 @@ class App extends Component {
   };
 
   render() {
-    const { tasks } = this.state;
+    const { connectedUser } = this.state;
     return (
       <div>
         <h1>To Do List</h1>
-        <Form handleSubmit={this.handleSubmit} />
-        <Table
-          taskData={tasks}
-          deleteTickedTasks={this.deleteTickedTasks}
-          handleCheck={this.handleCheck}
-        />
+        {this.state.connectedUser.id ? (
+          <div>
+            <Form handleSubmitTask={this.handleSubmitTask} />
+            <Table
+              taskData={connectedUser.tasks}
+              deleteTickedTasks={this.deleteTickedTasks}
+              handleCheck={this.handleCheck}
+            />
+          </div>
+        ) : (
+          <Connect
+            userData={connectedUser}
+            handleSubmitConnect={this.handleSubmitConnect}
+          />
+        )}
       </div>
     );
   }

@@ -27,7 +27,7 @@ class Table extends Component {
     const { taskData, deleteTickedTasks, handleCheck } = this.props; //<=> const personData = this.props.personData
 
     return (
-      <div>
+      <div id="table">
         <table>
           <thead>
             <tr>
