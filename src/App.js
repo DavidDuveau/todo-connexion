@@ -24,7 +24,12 @@ class App extends Component {
 
   //new task
   handleSubmitTask = (task) => {
-    this.setState({ tasks: [...this.state.connectedUser.tasks, task] });
+    this.setState({
+      connectedUser: {
+        ...this.state.connectedUser,
+        tasks: [...this.state.connectedUser.tasks, task],
+      },
+    });
   };
 
   //fill connectedUser with user
@@ -38,10 +43,12 @@ class App extends Component {
 
   //delete task selected
   deleteTickedTasks = () => {
-    const { tasks } = this.state;
-
     this.setState({
-      tasks: tasks.filter((task) => !task.checked),
+      /* tasks: tasks.filter((task) => !task.checked), */
+      connectedUser: {
+        ...this.state.connectedUser,
+        tasks: this.state.connectedUser.tasks.filter((task) => !task.checked),
+      },
     });
   };
 
@@ -50,16 +57,26 @@ class App extends Component {
     console.log("ischecked =" + isChecked);
 
     this.setState({
-      tasks: this.state.tasks.map((task, i) => {
+      /* tasks: this.state.tasks.map((task, i) => {
         if (i === index) {
           task.checked = isChecked;
         }
         return task;
-      }),
+      }), */
+      connectedUser: {
+        ...this.state.connectedUser,
+        tasks: this.state.connectedUser.tasks.map((task, i) => {
+          if (i === index) {
+            task.checked = isChecked;
+          }
+          return task;
+        }),
+      },
     });
   };
 
   render() {
+    console.log(this.state.connectedUser.tasks, this.state.users[0].tasks);
     return (
       <div>
         <h1>To Do List</h1>
