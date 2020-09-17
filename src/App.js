@@ -39,7 +39,7 @@ class App extends Component {
   //delete task selected
   deleteTickedTasks = () => {
     const { tasks } = this.state;
-    console.log(tasks);
+
     this.setState({
       tasks: tasks.filter((task) => !task.checked),
     });
@@ -47,8 +47,8 @@ class App extends Component {
 
   //changing status of checked whe checbox is checked
   handleCheck = (isChecked, index) => {
-    console.log(isChecked);
-    console.log(typeof index);
+    console.log("ischecked =" + isChecked);
+
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
         if (i === index) {
@@ -60,7 +60,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.connectedUser);
     return (
       <div>
         <h1>To Do List</h1>

@@ -30,6 +30,7 @@ class Form extends Component {
   };
 
   render() {
+    console.log(this.state);
     const { task } = this.state;
     return (
       <div>

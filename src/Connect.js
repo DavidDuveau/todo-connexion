@@ -24,8 +24,7 @@ class Connect extends Component {
 
   render() {
     const { userName, passWord } = this.state;
-    console.log(this.state.passWord);
-    console.log(this.state.userName);
+
     return (
       <form onSubmit={this.submitConnection}>
         <label htmlFor="userName">Nom</label>
