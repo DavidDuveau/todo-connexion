@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import Connect from "./Connect";
+import Login from "./Login";
 
 class App extends Component {
   state = {
@@ -32,30 +33,34 @@ class App extends Component {
     });
   };
 
-  //fill connectedUser with user
+  //fill connectedUser with user and login
   handleSubmitConnect = (userName, passWord) => {
-    this.setState({
-      connectedUser: this.state.users.find(
-        (person) => person.username === userName && person.pwd === passWord
-      ),
+    let userFound = this.state.users.find((user) => {
+      return user.username === userName && user.pwd === passWord;
     });
+
+    if (userFound) {
+      this.setState({ connectedUser: userFound });
+    } else {
+      alert("Wrong login or password");
+    }
   };
 
   //delete task selected
   deleteTickedTasks = () => {
-    this.setState({
-      /* tasks: tasks.filter((task) => !task.checked), */
-      connectedUser: {
-        ...this.state.connectedUser,
-        tasks: this.state.connectedUser.tasks.filter((task) => !task.checked),
-      },
-    });
+    if (window.confirm("Voulez-vous supprimer les tâches terminées")) {
+      this.setState({
+        /* tasks: tasks.filter((task) => !task.checked), */
+        connectedUser: {
+          ...this.state.connectedUser,
+          tasks: this.state.connectedUser.tasks.filter((task) => !task.checked),
+        },
+      });
+    }
   };
 
   //changing status of checked whe checbox is checked
   handleCheck = (isChecked, index) => {
-    console.log("ischecked =" + isChecked);
-
     this.setState({
       /* tasks: this.state.tasks.map((task, i) => {
         if (i === index) {
@@ -76,18 +81,23 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.connectedUser.tasks, this.state.users[0].tasks);
+    console.log(this.state.connectedUser.tasks);
     return (
       <div>
-        <h1>To Do List</h1>
         {this.state.connectedUser.hasOwnProperty("id") ? (
           <div>
-            <Form handleSubmitTask={this.handleSubmitTask} />
-            <Table
-              taskData={this.state.connectedUser.tasks}
-              deleteTickedTasks={this.deleteTickedTasks}
-              handleCheck={this.handleCheck}
-            />
+            <header>
+              <Login login={this.state.connectedUser} />
+            </header>
+            <main>
+              <h1>To Do List</h1>
+              <Form handleSubmitTask={this.handleSubmitTask} />
+              <Table
+                taskData={this.state.connectedUser.tasks}
+                deleteTickedTasks={this.deleteTickedTasks}
+                handleCheck={this.handleCheck}
+              />
+            </main>
           </div>
         ) : (
           <Connect handleSubmitConnect={this.handleSubmitConnect} />
