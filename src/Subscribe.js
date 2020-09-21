@@ -25,12 +25,19 @@ class Subscribe extends Component {
     console.log("ok");
   };
 
+  submitUser = (event) => {
+    event.preventDefault();
+    this.checkPassword(this.state.mdp, this.state.mdp_secure);
+    this.props.addUser(this.state);
+    this.setState(this.initialState);
+  };
+
   render() {
     const { nom, mdp, mdp_secure } = this.state;
     console.log(this.state);
     return (
       <div>
-        <form>
+        <form onSubmit={this.submitUser}>
           <label htmlFor="nom">Nom</label>
           <input
             type="text"

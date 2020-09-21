@@ -79,7 +79,7 @@ class App extends Component {
     }
   };
 
-  //changing status of checked whe checbox is checked
+  //changing status of checked when checbox is checked
   handleCheck = (isChecked, index) => {
     this.setState({
       /* tasks: this.state.tasks.map((task, i) => {
@@ -110,7 +110,7 @@ class App extends Component {
     return (
       <div>
         {this.state.isClicked ? (
-          <Subscribe />
+          <Subscribe addUser={this.addUser} usersData={this.state.users} />
         ) : (
           <div>
             {this.state.connectedUser.hasOwnProperty("id") ? (
