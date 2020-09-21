@@ -19,7 +19,7 @@ class Form extends Component {
 
   handleCheck = () => {
     this.setState({
-      isChecked: true,
+      isChecked: false,
     });
   };
 

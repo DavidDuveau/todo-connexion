@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import Connect from "./Connect";
-import Login from "./Login";
+import ShowLoggedin from "./ShowLoggedin";
+import LogoutButton from "./LogoutButton";
+import SubscribeButton from "./SubscribeButton";
+import Subscribe from "./Subscribe";
+
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -19,18 +24,15 @@ class App extends Component {
         pwd: "0000",
         tasks: [],
       },
+      {
+        id: 2,
+        username: "Camille",
+        pwd: "1337",
+        tasks: [],
+      },
     ],
     connectedUser: {},
-  };
-
-  //new task
-  handleSubmitTask = (task) => {
-    this.setState({
-      connectedUser: {
-        ...this.state.connectedUser,
-        tasks: [...this.state.connectedUser.tasks, task],
-      },
-    });
+    isClicked: false,
   };
 
   //fill connectedUser with user and login
@@ -44,6 +46,24 @@ class App extends Component {
     } else {
       alert("Wrong login or password");
     }
+  };
+
+  handleLogout = () => {
+    this.setState({ connectedUser: {} });
+  };
+
+  handleClickSubscribe = () => {
+    this.setState({ isClicked: !this.state.isClicked });
+  };
+
+  //new task
+  handleSubmitTask = (task) => {
+    this.setState({
+      connectedUser: {
+        ...this.state.connectedUser,
+        tasks: [...this.state.connectedUser.tasks, task],
+      },
+    });
   };
 
   //delete task selected
@@ -80,27 +100,48 @@ class App extends Component {
     });
   };
 
+  //add new user
+  addUser = (newUser) => {
+    this.setState({ users: [...this.state.users, newUser] });
+  };
+
   render() {
-    console.log(this.state.connectedUser.tasks);
+    console.log(this.state);
     return (
       <div>
-        {this.state.connectedUser.hasOwnProperty("id") ? (
-          <div>
-            <header>
-              <Login login={this.state.connectedUser} />
-            </header>
-            <main>
-              <h1>To Do List</h1>
-              <Form handleSubmitTask={this.handleSubmitTask} />
-              <Table
-                taskData={this.state.connectedUser.tasks}
-                deleteTickedTasks={this.deleteTickedTasks}
-                handleCheck={this.handleCheck}
-              />
-            </main>
-          </div>
+        {this.state.isClicked ? (
+          <Subscribe />
         ) : (
-          <Connect handleSubmitConnect={this.handleSubmitConnect} />
+          <div>
+            {this.state.connectedUser.hasOwnProperty("id") ? (
+              <div>
+                <header id="logged-page">
+                  <ShowLoggedin login={this.state.connectedUser} />
+                  <LogoutButton handleLogout={this.handleLogout} />
+                </header>
+                <main>
+                  <h1>To Do List</h1>
+                  <Form handleSubmitTask={this.handleSubmitTask} />
+                  <Table
+                    taskData={this.state.connectedUser.tasks}
+                    deleteTickedTasks={this.deleteTickedTasks}
+                    handleCheck={this.handleCheck}
+                  />
+                </main>
+              </div>
+            ) : (
+              <div>
+                <header id="log-in-page">
+                  <SubscribeButton
+                    handleClickSubscribe={this.handleClickSubscribe}
+                  />
+                </header>
+                <main>
+                  <Connect handleSubmitConnect={this.handleSubmitConnect} />
+                </main>
+              </div>
+            )}
+          </div>
         )}
       </div>
     );

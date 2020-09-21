@@ -1,0 +1,11 @@
+#logged-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em;
+}
+
+#log-in-page {
+  display: flex;
+  justify-content: right;
+  margin: 0.5em;
+}
