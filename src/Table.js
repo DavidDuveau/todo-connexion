@@ -15,7 +15,12 @@ const TBody = (props) => {
       <tr key={index}>
         <td className={isChecked}>{task.task}</td>
         <td>
-          <input type="checkbox" onChange={handleCheck} index={index} />
+          <input
+            type="checkbox"
+            onChange={handleCheck}
+            index={index}
+            checked={task.checked}
+          />
         </td>
       </tr>
     );

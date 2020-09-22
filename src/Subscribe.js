@@ -2,11 +2,9 @@ import React, { Component } from "react";
 
 class Subscribe extends Component {
   initialState = {
-    id: null,
     username: "",
     pwd: "",
     pwd_secure: "",
-    tasks: [],
   };
   state = this.initialState;
 
@@ -21,19 +19,39 @@ class Subscribe extends Component {
   checkPassword = (pwd, pwd_secure) => {
     if (pwd_secure !== pwd) {
       alert("Mot de passe non confirmé!");
+      this.setState({ pwd_secure: "" });
     } else {
-      this.submitUser();
+      this.checkLoginUnique();
     }
   };
 
+  checkLoginUnique = () => {
+    let userExist = this.props.usersData.find(
+      (element) => element.username === this.state.username
+    );
+
+    userExist !== undefined
+      ? alert("Nom d'utilisateur déjà pris")
+      : this.submitUser();
+  };
+
   submitUser = () => {
-    this.props.addUser(this.state);
+    let newUser = {
+      id: this.setId(),
+      username: this.state.username,
+      pwd: this.state.pwd,
+      tasks: [],
+    };
+    this.props.addUser(newUser);
     this.setState(this.initialState);
     this.props.handleClickSubscribe();
   };
 
   //set id for new user
-  setId = () => {};
+  setId = () => {
+    let id = this.props.usersData.length + 1;
+    return id;
+  };
 
   handleSubmitUser = (event) => {
     event.preventDefault();
@@ -42,45 +60,48 @@ class Subscribe extends Component {
 
   render() {
     const { username, pwd, pwd_secure } = this.state;
+
     console.log(this.state);
     return (
       <div>
-        <form onSubmit={this.handleSubmitUser}>
-          <label htmlFor="username">
-            Nom
-            <input
-              type="text"
-              name="username"
-              id="username"
-              value={username}
-              onChange={this.handleChange}
-            />
-          </label>
+        <main>
+          <form onSubmit={this.handleSubmitUser}>
+            <label htmlFor="username">
+              Nom
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+            </label>
 
-          <label htmlFor="pwd">
-            Mot de passe
-            <input
-              type="text"
-              name="pwd"
-              id="pwd"
-              value={pwd}
-              onChange={this.handleChange}
-            />
-          </label>
+            <label htmlFor="pwd">
+              Mot de passe
+              <input
+                type="text"
+                name="pwd"
+                id="pwd"
+                value={pwd}
+                onChange={this.handleChange}
+              />
+            </label>
 
-          <label htmlFor="mdp_secure">
-            Confirmer mot de passe
-            <input
-              type="text"
-              name="pwd_secure"
-              id="pwd_secure"
-              value={pwd_secure}
-              onChange={this.handleChange}
-            />
-          </label>
+            <label htmlFor="pwd_secure">
+              Confirmer mot de passe
+              <input
+                type="text"
+                name="pwd_secure"
+                id="pwd_secure"
+                value={pwd_secure}
+                onChange={this.handleChange}
+              />
+            </label>
 
-          <input type="submit" value="Valider" />
-        </form>
+            <input type="submit" value="Valider" />
+          </form>
+        </main>
       </div>
     );
   }

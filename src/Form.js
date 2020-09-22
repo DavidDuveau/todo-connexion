@@ -4,7 +4,6 @@ import "./Form.css";
 class Form extends Component {
   initialState = {
     task: "",
-    checked: false,
   };
 
   state = this.initialState;
@@ -17,15 +16,9 @@ class Form extends Component {
     });
   };
 
-  handleCheck = () => {
-    this.setState({
-      isChecked: false,
-    });
-  };
-
   submitForm = (event) => {
     event.preventDefault();
-    this.props.handleSubmitTask(this.state);
+    this.props.handleSubmitTask(this.state.task);
     this.setState(this.initialState);
   };
 
