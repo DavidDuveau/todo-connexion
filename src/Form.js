@@ -34,14 +34,16 @@ class Form extends Component {
     return (
       <div>
         <form onSubmit={this.submitForm}>
-          <label htmlFor="task">Nouvelle tâche</label>
-          <input
-            type="text"
-            name="task"
-            id="task"
-            value={task}
-            onChange={this.handleChange}
-          />
+          <label htmlFor="task">
+            Nouvelle tâche
+            <input
+              type="text"
+              name="task"
+              id="task"
+              value={task}
+              onChange={this.handleChange}
+            />
+          </label>
 
           <input type="submit" value="Nouvelle tâche" />
         </form>

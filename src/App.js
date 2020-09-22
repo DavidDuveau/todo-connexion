@@ -106,11 +106,24 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.users);
     return (
       <div>
         {this.state.isClicked ? (
-          <Subscribe addUser={this.addUser} usersData={this.state.users} />
+          <div>
+            <header id="log-in-page">
+              <SubscribeButton
+                handleClickSubscribe={this.handleClickSubscribe}
+              />
+            </header>
+            <main>
+              <Subscribe
+                addUser={this.addUser}
+                usersData={this.state.users}
+                handleClickSubscribe={this.handleClickSubscribe}
+              />
+            </main>
+          </div>
         ) : (
           <div>
             {this.state.connectedUser.hasOwnProperty("id") ? (

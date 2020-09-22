@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Subscribe extends Component {
   initialState = {
     id: null,
-    nom: "",
-    mdp: "",
-    mdp_secure: "",
+    username: "",
+    pwd: "",
+    pwd_secure: "",
     tasks: [],
   };
   state = this.initialState;
@@ -18,52 +18,66 @@ class Subscribe extends Component {
     });
   };
 
-  checkPassword = (mdp, mdp_secure) => {
-    if (mdp_secure !== mdp) {
-      console.log("notgood");
+  checkPassword = (pwd, pwd_secure) => {
+    if (pwd_secure !== pwd) {
+      alert("Mot de passe non confirmé!");
+    } else {
+      this.submitUser();
     }
-    console.log("ok");
   };
 
-  submitUser = (event) => {
-    event.preventDefault();
-    this.checkPassword(this.state.mdp, this.state.mdp_secure);
+  submitUser = () => {
     this.props.addUser(this.state);
     this.setState(this.initialState);
+    this.props.handleClickSubscribe();
+  };
+
+  //set id for new user
+  setId = () => {};
+
+  handleSubmitUser = (event) => {
+    event.preventDefault();
+    this.checkPassword(this.state.pwd, this.state.pwd_secure);
   };
 
   render() {
-    const { nom, mdp, mdp_secure } = this.state;
+    const { username, pwd, pwd_secure } = this.state;
     console.log(this.state);
     return (
       <div>
-        <form onSubmit={this.submitUser}>
-          <label htmlFor="nom">Nom</label>
-          <input
-            type="text"
-            name="nom"
-            id="nom"
-            value={nom}
-            onChange={this.handleChange}
-          />
+        <form onSubmit={this.handleSubmitUser}>
+          <label htmlFor="username">
+            Nom
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value={username}
+              onChange={this.handleChange}
+            />
+          </label>
 
-          <label htmlFor="nom">Mot de passe</label>
-          <input
-            type="text"
-            name="mdp"
-            id="mdp"
-            value={mdp}
-            onChange={this.handleChange}
-          />
+          <label htmlFor="pwd">
+            Mot de passe
+            <input
+              type="text"
+              name="pwd"
+              id="pwd"
+              value={pwd}
+              onChange={this.handleChange}
+            />
+          </label>
 
-          <label htmlFor="mdp_secure">Confirmer mot de passe</label>
-          <input
-            type="text"
-            name="mdp_secure"
-            id="mdp_secure"
-            value={mdp_secure}
-            onChange={this.handleChange}
-          />
+          <label htmlFor="mdp_secure">
+            Confirmer mot de passe
+            <input
+              type="text"
+              name="pwd_secure"
+              id="pwd_secure"
+              value={pwd_secure}
+              onChange={this.handleChange}
+            />
+          </label>
 
           <input type="submit" value="Valider" />
         </form>
