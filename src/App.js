@@ -16,7 +16,10 @@ class App extends Component {
         id: 1,
         username: "David",
         pwd: "1234",
-        tasks: [],
+        tasks: [
+          { task: "faire la vaisselle", checked: true },
+          { task: "coder", checked: false },
+        ],
       },
       {
         id: 2,
@@ -132,7 +135,6 @@ class App extends Component {
         {this.state.isClicked ? (
           <div>
             <header>
-              <h2>Inscription</h2>
               <SubscribeButton
                 handleClickSubscribe={this.handleClickSubscribe}
               />
@@ -150,24 +152,25 @@ class App extends Component {
           <div>
             {this.state.connectedUser.hasOwnProperty("id") ? (
               <div>
-                <header>
+                <header id="logged">
                   <ShowLoggedin login={this.state.connectedUser} />
                   <LogoutButton handleLogout={this.handleLogout} />
                 </header>
                 <main>
-                  <h1>To Do List</h1>
-                  <Form handleSubmitTask={this.handleSubmitTask} />
-                  <Table
-                    taskData={this.state.connectedUser.tasks}
-                    deleteTickedTasks={this.deleteTickedTasks}
-                    handleCheck={this.handleCheck}
-                  />
+                  <fieldset>
+                    <legend>ToDo List</legend>
+                    <Form handleSubmitTask={this.handleSubmitTask} />
+                    <Table
+                      taskData={this.state.connectedUser.tasks}
+                      deleteTickedTasks={this.deleteTickedTasks}
+                      handleCheck={this.handleCheck}
+                    />
+                  </fieldset>
                 </main>
               </div>
             ) : (
               <div>
                 <header>
-                  <h2>ToDo Connexion</h2>
                   <SubscribeButton
                     handleClickSubscribe={this.handleClickSubscribe}
                   />

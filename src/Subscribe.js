@@ -64,7 +64,8 @@ class Subscribe extends Component {
     console.log(this.state);
     return (
       <div>
-        <main>
+        <fieldset>
+          <legend>Inscription</legend>
           <form onSubmit={this.handleSubmitUser}>
             <label htmlFor="username">
               Nom
@@ -101,7 +102,7 @@ class Subscribe extends Component {
 
             <input type="submit" value="Valider" />
           </form>
-        </main>
+        </fieldset>
       </div>
     );
   }

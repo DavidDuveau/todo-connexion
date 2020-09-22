@@ -26,26 +26,29 @@ class Connect extends Component {
     const { userName, passWord } = this.state;
 
     return (
-      <form onSubmit={this.submitConnection}>
-        <label htmlFor="userName">Nom</label>
-        <input
-          type="text"
-          name="userName"
-          id="userName"
-          value={userName}
-          onChange={this.handleChange}
-        />
+      <fieldset>
+        <legend>Connexion</legend>
+        <form onSubmit={this.submitConnection}>
+          <label htmlFor="userName">Nom</label>
+          <input
+            type="text"
+            name="userName"
+            id="userName"
+            value={userName}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="passWord">Mot de passe</label>
-        <input
-          type="password"
-          name="passWord"
-          id="passWord"
-          value={passWord}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Connexion" />
-      </form>
+          <label htmlFor="passWord">Mot de passe</label>
+          <input
+            type="password"
+            name="passWord"
+            id="passWord"
+            value={passWord}
+            onChange={this.handleChange}
+          />
+          <input type="submit" value="Connexion" />
+        </form>
+      </fieldset>
     );
   }
 }

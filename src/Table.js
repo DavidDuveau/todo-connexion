@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Table.css";
 
 const TBody = (props) => {
   const handleCheck = (event) => {
